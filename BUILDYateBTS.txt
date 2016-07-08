@@ -1,0 +1,57 @@
+sudo apt-get install git apache2 php5 bladerf libbladerf-dev libbladerf0 automake
+
+
+cd yate
+./autogen.sh
+./configure --prefix=/usr/local
+make -j4
+sudo make install
+sudo ldconfig
+cd ..
+
+cd yatebts
+./autogen.sh
+./configure --prefix=/usr/local
+make -j4
+sudo make install
+sudo ldconfig
+
+
+cd yate-bts
+./autogen.sh
+./configure --prefix=/usr/local
+make -j4
+sudo make install
+sudo ldconfig
+
+
+
+cd /var/www/html/
+sudo ln -s /usr/local/share/yate/nib_web nib
+
+
+sudo chmod -R a+w /usr/local/etc/yate
+
+
+
+Time for some configuration now!
+
+Configuration
+
+Open the /usr/local/etc/yate/ybts.conf file either with nano or vi and update the following values:
+
+Radio.Band=900
+Radio.C0=1000
+Identity.MCC=YOUR_COUNTRY_MCC
+Identity.MNC=YOUR_OPERATOR_MNC
+Identity.ShortName=MyEvilBTS
+Radio.PowerManager.MaxAttenDB=35
+Radio.PowerManager.MinAttenDB=35
+You can find valid MCC and MNC values here.
+
+Now, edit the /usr/local/etc/yate/subscribers.conf:
+
+country_code=YOUR_CONTRY_CODE
+regexp=.*
+
+

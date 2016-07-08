@@ -1,0 +1,14 @@
+sudo apt-get install libboost-all-dev libusb-1.0-0-dev python-mako doxygen python-docutils cmake build-essential
+
+cmake -DCMAKE_INSTALL_PREFIX=/opt/uhd ../
+
+Static Builds
+
+Using CMake, UHD can be built as a static library by switching on ENABLE_STATIC_LIBS.
+
+cmake -DENABLE_STATIC_LIBS=ON <path to UHD source>
+
+
+
+
+g++ your_uhd_app.cpp -Wl,-whole-archive <path to UHD libs>/libuhd.a -Wl,-no-whole-archive -ldl -lpthread -l<all other libraries>
